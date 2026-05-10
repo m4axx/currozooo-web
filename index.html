@@ -406,38 +406,44 @@ section { position:relative; z-index:2; }
 .gallery-grid {
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  grid-auto-rows:280px;
-  gap:10px;
+  grid-auto-rows:300px;
+  gap:8px;
 }
 .gpost {
   border:1px solid rgba(255,255,255,.07); overflow:hidden;
   position:relative; cursor:pointer; transition:all .4s;
   display:block; text-decoration:none;
 }
-.gpost:first-child { grid-column:span 2; grid-row:span 2; }
-.gpost img { width:100%; height:100%; object-fit:cover; transition:transform .5s; display:block; }
-.gpost:hover img { transform:scale(1.06); }
+.gpost.featured { grid-column:span 2; }
+.gpost img { width:100%; height:100%; object-fit:cover; transition:transform .6s; display:block; }
+.gpost:hover img { transform:scale(1.07); }
 .gpost:hover { border-color:rgba(255,0,128,.5); box-shadow:0 0 30px rgba(255,0,128,.15); }
-/* Link cards (no photo) */
-.gpost-card {
-  width:100%; height:100%;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:10px; padding:16px;
+.gpost-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top,rgba(4,4,10,.85) 0%,rgba(4,4,10,.2) 50%,transparent 100%);
+  display:flex; flex-direction:column; justify-content:flex-end; padding:16px 18px;
+  opacity:0; transition:opacity .4s;
 }
-.gpost-card-icon { font-size:2rem; line-height:1; }
-.gpost-card-type { font-family:'Share Tech Mono',monospace; font-size:.5rem; letter-spacing:.3em; color:var(--neon-pink); text-transform:uppercase; }
-.gpost-card-label { font-family:'Share Tech Mono',monospace; font-size:.55rem; letter-spacing:.1em; color:rgba(255,255,255,.25); text-transform:uppercase; text-align:center; padding:0 8px; line-height:1.6; }
-.gpost-card-arrow { font-family:'Share Tech Mono',monospace; font-size:.6rem; color:rgba(0,245,255,.4); position:absolute; bottom:12px; right:14px; transition:color .3s; }
-.gpost:hover .gpost-card-arrow { color:var(--neon-cyan); }
-.gpost:hover .gpost-card-type { color:var(--neon-cyan); }
-/* per-post gradient bg */
-.gpost:nth-child(1) { background:linear-gradient(135deg,#060615,#0d0d20); }
-.gpost:nth-child(2) { background:linear-gradient(135deg,#1a001a,#0a0015); }
+.gpost:hover .gpost-overlay { opacity:1; }
+.gpost-overlay span { font-family:'Orbitron',monospace; font-size:.65rem; font-weight:700; color:white; letter-spacing:.15em; text-transform:uppercase; }
+.gpost-overlay small { font-family:'Share Tech Mono',monospace; font-size:.55rem; color:var(--neon-cyan); letter-spacing:.1em; margin-top:3px; }
+.gpost-overlay .ig-tag { font-family:'Share Tech Mono',monospace; font-size:.5rem; color:rgba(255,0,128,.7); letter-spacing:.15em; position:absolute; top:10px; right:12px; }
+/* Reel card (sin foto) */
+.gpost.reel-card { background:linear-gradient(135deg,#0a001a,#10001f); }
+.gpost.reel-card .gpost-overlay { opacity:1; background:none; }
+.gpost-play {
+  position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+}
+.gpost-play-icon { font-size:2.8rem; color:rgba(255,0,128,.7); line-height:1; transition:color .3s, transform .3s; }
+.gpost:hover .gpost-play-icon { color:var(--neon-pink); transform:scale(1.15); }
+.gpost-play-label { font-family:'Share Tech Mono',monospace; font-size:.5rem; letter-spacing:.3em; color:rgba(255,255,255,.25); text-transform:uppercase; }
+/* Gradients per cell */
+.gpost:nth-child(2) { background:linear-gradient(135deg,#060615,#0d0d20); }
 .gpost:nth-child(3) { background:linear-gradient(135deg,#001a1a,#00100a); }
-.gpost:nth-child(4) { background:linear-gradient(135deg,#1a0a00,#100500); }
+.gpost:nth-child(4) { background:linear-gradient(135deg,#1a000a,#100005); }
 .gpost:nth-child(5) { background:linear-gradient(135deg,#0a001a,#050010); }
 .gpost:nth-child(6) { background:linear-gradient(135deg,#001a0a,#001005); }
-.gpost:nth-child(7) { background:linear-gradient(135deg,#1a1000,#100a00); }
+.gpost:nth-child(7) { background:linear-gradient(135deg,#1a0800,#100500); }
 
 .gallery-cta { text-align:center; margin-top:32px; }
 .gallery-cta p { font-family:'Share Tech Mono',monospace; font-size:.65rem; color:var(--dim); letter-spacing:.1em; margin-bottom:16px; }
@@ -502,18 +508,43 @@ footer { position:relative; z-index:2; background:var(--deep); border-top:1px so
   .sobre-grid { grid-template-columns:1fr; gap:40px; }
   .proyectos-grid { grid-template-columns:1fr; }
   .proy-card.featured { grid-column:auto; display:block; }
+  .proy-card.featured .delorean-vis { margin-bottom:24px; }
   .metrics-bar { grid-template-columns:repeat(2,1fr); }
   .metric { border-bottom:1px solid rgba(255,255,255,.06); }
   .footer-top { grid-template-columns:1fr 1fr; }
+  .gallery-grid { grid-template-columns:repeat(2,1fr); grid-auto-rows:220px; }
+  .gpost.featured { grid-column:span 2; grid-row:auto; }
 }
 @media(max-width:768px) {
-  .si { padding:70px 20px; }
-  nav { padding:0 20px; }
+  .si { padding:60px 16px; }
+  nav { padding:0 16px; height:58px; }
   .nav-links { display:none; }
-  .footer-top { grid-template-columns:1fr; }
+  .footer-top { grid-template-columns:1fr; gap:36px; }
   body { cursor:auto; }
   .cur,.cur-r { display:none; }
-  .hero-layout { padding-top:0; }
+  .hero-layout { padding-top:0; gap:36px; }
+  .hero-name { font-size:clamp(2.4rem,10vw,4rem); }
+  .stitle { font-size:clamp(2rem,8vw,4rem); }
+  .gallery-grid { grid-template-columns:1fr 1fr; grid-auto-rows:180px; gap:6px; }
+  .gpost.featured { grid-column:span 2; }
+  .metrics-bar { grid-template-columns:repeat(2,1fr); }
+  .delorean-vis { aspect-ratio:4/3; }
+  .community-total { margin-bottom:24px; }
+  .hero-ctas { gap:8px; }
+  .btn { padding:12px 20px; font-size:.6rem; }
+  .ig-stats { gap:0; }
+  .ig-stat { padding:10px 4px; }
+}
+@media(max-width:480px) {
+  .gallery-grid { grid-template-columns:1fr 1fr; grid-auto-rows:200px; }
+  .gpost.featured { grid-column:span 2; }
+  .footer-top { grid-template-columns:1fr; }
+  .hero-layout { gap:28px; }
+  .ig-card { padding:24px 18px; }
+  .ig-actions { flex-wrap:wrap; }
+  .metrics-bar { grid-template-columns:1fr 1fr; }
+  .sobre-grid { gap:28px; }
+  nav { padding:0 12px; }
 }
 </style>
 </head>
@@ -603,10 +634,10 @@ footer { position:relative; z-index:2; background:var(--deep); border-top:1px so
 
       <!-- Mini grid posts -->
       <div class="ig-grid">
-        <a href="https://www.instagram.com/p/DTT9lP5iJzb/" target="_blank" class="ig-post" style="background:linear-gradient(135deg,#060615,#0d0d20)"><img src="assets/instagram/delorean.jpg" alt="DeLorean ZOOO" style="width:100%;height:100%;object-fit:cover"></a>
-        <a href="https://www.instagram.com/reel/DRAvKw9jVaG/" target="_blank" class="ig-post" style="background:linear-gradient(135deg,#1a001a,#0a0015)"><div class="ig-post-placeholder">▶<br>REEL</div></a>
-        <a href="https://www.instagram.com/p/DRzGfytjavv/" target="_blank" class="ig-post" style="background:linear-gradient(135deg,#001a1a,#00100a)"><div class="ig-post-placeholder">📸<br>POST</div></a>
-        <a href="https://www.instagram.com/reel/DYKpDS_tVvo/" target="_blank" class="ig-post" style="background:linear-gradient(135deg,#1a0a00,#100500)"><div class="ig-post-placeholder">▶<br>REEL</div></a>
+        <a href="https://www.instagram.com/p/DTT9lP5iJzb/" target="_blank" class="ig-post"><img src="assets/instagram/delorean.jpg" alt="DeLorean ZOOO" style="width:100%;height:100%;object-fit:cover;object-position:center 65%"></a>
+        <a href="https://www.instagram.com/reel/DRAvKw9jVaG/" target="_blank" class="ig-post"><img src="assets/zooo/arcade.jpg" alt="ZOOO Arcade" style="width:100%;height:100%;object-fit:cover"></a>
+        <a href="https://www.instagram.com/p/DRzGfytjavv/" target="_blank" class="ig-post"><img src="assets/zooo/tienda.jpg" alt="ZOOO Madrid" style="width:100%;height:100%;object-fit:cover"></a>
+        <a href="https://www.instagram.com/reel/DYKpDS_tVvo/" target="_blank" class="ig-post"><img src="assets/zooo/interior.jpg" alt="ZOOO Interior" style="width:100%;height:100%;object-fit:cover"></a>
         <a href="https://www.instagram.com/reel/DYJ1sMjNdUw/" target="_blank" class="ig-post" style="background:linear-gradient(135deg,#0a001a,#050010)"><div class="ig-post-placeholder">▶<br>REEL</div></a>
         <a href="https://www.instagram.com/reel/DX4LjHAN7M7/" target="_blank" class="ig-post" style="background:linear-gradient(135deg,#001a0a,#001005)"><div class="ig-post-placeholder">▶<br>REEL</div></a>
       </div>
@@ -732,7 +763,7 @@ footer { position:relative; z-index:2; background:var(--deep); border-top:1px so
       <!-- FEATURED: DeLorean -->
       <div class="proy-card featured rv">
         <div class="delorean-vis" style="padding:0;overflow:hidden">
-          <img src="assets/instagram/delorean.jpg" alt="DeLorean DMC-12 Curro ZOOO" style="width:100%;height:100%;object-fit:cover;opacity:.9">
+          <img src="assets/instagram/delorean.jpg" alt="DeLorean DMC-12 Curro ZOOO" style="width:100%;height:100%;object-fit:cover;object-position:center 70%;opacity:.9">
         </div>
         <div>
           <div class="proy-num">00</div>
@@ -797,64 +828,48 @@ footer { position:relative; z-index:2; background:var(--deep); border-top:1px so
 
     <div class="gallery-grid">
 
-      <!-- FEATURED: DeLorean (spans 2×2) -->
-      <a href="https://www.instagram.com/p/DTT9lP5iJzb/" target="_blank" class="gpost rv st" style="--i:0">
-        <img src="assets/instagram/delorean.jpg" alt="DeLorean DMC-12 — Curro ZOOO Madrid">
-        <div class="gpost-card-arrow">↗ IG</div>
+      <!-- Fila 1: Arcade (2col) + DeLorean (1col) -->
+      <a href="https://www.zooo.es/arcade" target="_blank" class="gpost featured rv st" style="--i:0">
+        <img src="assets/zooo/arcade.jpg" alt="ZOOO Arcade — máquinas originales con neón">
+        <div class="gpost-overlay">
+          <span class="ig-tag">↗ zooo.es</span>
+          <span>ZOOO ARCADE 2.0</span>
+          <small>42 máquinas originales · ABC Serrano</small>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/p/DTT9lP5iJzb/" target="_blank" class="gpost rv st" style="--i:1">
+        <img src="assets/instagram/delorean.jpg" alt="DeLorean DMC-12 Curro ZOOO Madrid" style="object-position:center 70%">
+        <div class="gpost-overlay">
+          <span class="ig-tag">↗ IG</span>
+          <span>DELOREAN DMC-12</span>
+          <small>88 MPH · Madrid</small>
+        </div>
       </a>
 
-      <a href="https://www.instagram.com/reel/DRAvKw9jVaG/" target="_blank" class="gpost rv st" style="--i:1">
-        <div class="gpost-card">
-          <span class="gpost-card-icon">▶</span>
-          <span class="gpost-card-type">Reel</span>
-          <span class="gpost-card-label">ZOOO Arcade<br>en acción</span>
+      <!-- Fila 2: Tienda + Interior + Retro PC -->
+      <a href="https://www.zooo.es" target="_blank" class="gpost rv st" style="--i:2">
+        <img src="assets/zooo/tienda.jpg" alt="Tienda ZOOO Madrid">
+        <div class="gpost-overlay">
+          <span class="ig-tag">↗ zooo.es</span>
+          <span>ZOOO MADRID</span>
+          <small>Desde 1997 · Electronic experts</small>
         </div>
-        <div class="gpost-card-arrow">↗ IG</div>
       </a>
-
-      <a href="https://www.instagram.com/p/DRzGfytjavv/" target="_blank" class="gpost rv st" style="--i:2">
-        <div class="gpost-card">
-          <span class="gpost-card-icon">📸</span>
-          <span class="gpost-card-type">Post</span>
-          <span class="gpost-card-label">Colección<br>de móviles</span>
+      <a href="https://www.zooo.es" target="_blank" class="gpost rv st" style="--i:3">
+        <img src="assets/zooo/interior.jpg" alt="Interior tienda ZOOO">
+        <div class="gpost-overlay">
+          <span class="ig-tag">↗ zooo.es</span>
+          <span>ELECTRÓNICA</span>
+          <small>Apple IRP Oficial · Garantía 3 meses</small>
         </div>
-        <div class="gpost-card-arrow">↗ IG</div>
       </a>
-
-      <a href="https://www.instagram.com/reel/DYKpDS_tVvo/" target="_blank" class="gpost rv st" style="--i:3">
-        <div class="gpost-card">
-          <span class="gpost-card-icon">▶</span>
-          <span class="gpost-card-type">Reel</span>
-          <span class="gpost-card-label">Reparaciones<br>épicas</span>
+      <a href="https://www.instagram.com/currozooo" target="_blank" class="gpost rv st" style="--i:4">
+        <img src="assets/zooo/retro-pc.jpg" alt="Colección retro tech ZOOO">
+        <div class="gpost-overlay">
+          <span class="ig-tag">↗ @currozooo</span>
+          <span>COLECCIÓN RETRO</span>
+          <small>Historia de la tecnología</small>
         </div>
-        <div class="gpost-card-arrow">↗ IG</div>
-      </a>
-
-      <a href="https://www.instagram.com/reel/DYJ1sMjNdUw/" target="_blank" class="gpost rv st" style="--i:4">
-        <div class="gpost-card">
-          <span class="gpost-card-icon">▶</span>
-          <span class="gpost-card-type">Reel</span>
-          <span class="gpost-card-label">DeLorean<br>por Madrid</span>
-        </div>
-        <div class="gpost-card-arrow">↗ IG</div>
-      </a>
-
-      <a href="https://www.instagram.com/reel/DYCqE0Ht_9P/" target="_blank" class="gpost rv st" style="--i:5">
-        <div class="gpost-card">
-          <span class="gpost-card-icon">▶</span>
-          <span class="gpost-card-type">Reel</span>
-          <span class="gpost-card-label">Arcade<br>clásico 80s</span>
-        </div>
-        <div class="gpost-card-arrow">↗ IG</div>
-      </a>
-
-      <a href="https://www.instagram.com/reel/DX4LjHAN7M7/" target="_blank" class="gpost rv st" style="--i:6">
-        <div class="gpost-card">
-          <span class="gpost-card-icon">▶</span>
-          <span class="gpost-card-type">Reel</span>
-          <span class="gpost-card-label">Máquinas<br>originales</span>
-        </div>
-        <div class="gpost-card-arrow">↗ IG</div>
       </a>
 
     </div>
@@ -958,6 +973,7 @@ footer { position:relative; z-index:2; background:var(--deep); border-top:1px so
   </div>
 </footer>
 
+<script async src="https://www.instagram.com/embed.js"></script>
 <script>
 // --- STARS ---
 const sb = document.getElementById('stbg');

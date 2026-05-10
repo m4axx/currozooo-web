@@ -1,0 +1,4 @@
+.vercel
+node_modules/
+.claude/
+assets/instagram/ig-debug.jpg
