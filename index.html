@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curro Quevedo — @currozooo | ZOOO Madrid</title>
+<meta name="description" content="Curro Quevedo. Fundador de ZOOO Madrid. Arcade, electrónica, DeLorean y colección de móviles. Expertos desde 1997.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ====== RESET & VARS ====== */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --black: #04040a;
+  --deep: #070710;
+  --neon-pink: #ff0080;
+  --neon-cyan: #00f5ff;
+  --neon-yellow: #ffee00;
+  --neon-magenta: #ff00ff;
+  --neon-red: #ff1a1a;
+  --neon-orange: #ff6600;
+  --grid: rgba(0,245,255,0.05);
+  --text: #e0e0e0;
+  --dim: #777;
+  --glow-p: 0 0 20px rgba(255,0,128,.8),0 0 50px rgba(255,0,128,.3);
+  --glow-c: 0 0 20px rgba(0,245,255,.8),0 0 50px rgba(0,245,255,.3);
+  --glow-y: 0 0 20px rgba(255,238,0,.8),0 0 50px rgba(255,238,0,.3);
+}
+
+html { scroll-behavior:smooth; }
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background: var(--deep); }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--neon-pink), var(--neon-cyan)); }
+
+/* Custom cursor */
+.cur { position:fixed; width:10px; height:10px; background:var(--neon-cyan); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); box-shadow:var(--glow-c); mix-blend-mode:screen; transition:width .15s,height .15s,background .15s; }
+.cur-r { position:fixed; width:32px; height:32px; border:1.5px solid var(--neon-pink); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:left .12s,top .12s,width .2s,height .2s; opacity:.7; }
+
+/* ====== BG ====== */
+.grid-bg {
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image: linear-gradient(var(--grid) 1px,transparent 1px), linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:55px 55px;
+}
+.grid-bg::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%,transparent 0%,var(--black) 70%); }
+.scanlines {
+  position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.35;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.2) 2px,rgba(0,0,0,.2) 4px);
+}
+#ptc { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+/* ====== NAV ====== */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  padding:0 48px; height:68px;
+  display:flex; align-items:center; justify-content:space-between;
+  transition:background .3s,backdrop-filter .3s;
+}
+nav.s { background:rgba(4,4,10,.88); backdrop-filter:blur(22px); border-bottom:1px solid rgba(0,245,255,.12); }
+.nav-logo { font-family:'Orbitron',monospace; font-size:.85rem; font-weight:900; letter-spacing:.3em; text-decoration:none; color:white; text-shadow:var(--glow-c); }
+.nav-logo span { color:var(--neon-cyan); }
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a { font-family:'Share Tech Mono',monospace; font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; text-decoration:none; color:var(--dim); transition:color .3s,text-shadow .3s; }
+.nav-links a:hover { color:var(--neon-cyan); text-shadow:var(--glow-c); }
+.nav-ig {
+  font-family:'Share Tech Mono',monospace; font-size:.65rem; letter-spacing:.1em; text-transform:uppercase;
+  padding:9px 18px; border:1px solid var(--neon-pink); color:var(--neon-pink); text-decoration:none;
+  transition:all .3s; position:relative; overflow:hidden;
+}
+.nav-ig::before { content:''; position:absolute; inset:0; background:var(--neon-pink); transform:translateX(-100%); transition:transform .3s; z-index:-1; }
+.nav-ig:hover { color:var(--black); }
+.nav-ig:hover::before { transform:translateX(0); }
+
+/* ====== HERO ====== */
+#hero {
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden; z-index:2; padding:120px 40px 80px;
+}
+
+/* Retrowave horizon */
+.hw-floor {
+  position:absolute; bottom:0; left:-30%; right:-30%; height:50%;
+  background-image: linear-gradient(rgba(0,245,255,.25) 1px,transparent 1px), linear-gradient(90deg,rgba(255,0,128,.15) 1px,transparent 1px);
+  background-size:70px 70px;
+  transform:perspective(500px) rotateX(68deg); transform-origin:bottom;
+  pointer-events:none;
+}
+.hw-floor::before { content:''; position:absolute; inset:0; background:linear-gradient(to top,var(--black) 0%,transparent 55%); }
+.hw-horizon {
+  position:absolute; bottom:44%; left:-10%; right:-10%; height:3px;
+  background:linear-gradient(90deg,transparent,var(--neon-pink),var(--neon-cyan),var(--neon-magenta),transparent);
+  box-shadow:0 0 30px 10px rgba(255,0,128,.4),0 0 60px 20px rgba(0,245,255,.15);
+  pointer-events:none;
+}
+.hw-sun {
+  position:absolute; bottom:42%; left:50%; transform:translateX(-50%);
+  width:240px; height:120px; border-radius:240px 240px 0 0;
+  background:linear-gradient(180deg,#ffee00 0%,#ff6600 35%,#ff0080 70%,#ff00ff 100%);
+  overflow:hidden; pointer-events:none;
+}
+.hw-sun::before {
+  content:''; position:absolute; inset:0;
+  background:repeating-linear-gradient(180deg,transparent 0,transparent 7px,var(--black) 7px,var(--black) 10px);
+  animation:slines .6s steps(1) infinite;
+}
+@keyframes slines { 0%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+
+.stars-bg { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.star { position:absolute; background:white; border-radius:50%; animation:tw var(--d,3s) ease-in-out infinite; animation-delay:var(--dl,0s); }
+@keyframes tw { 0%,100%{opacity:.15} 50%{opacity:1} }
+
+/* Hero layout: ig card + text side by side */
+.hero-layout {
+  display:grid; grid-template-columns:420px 1fr; gap:80px;
+  align-items:center; max-width:1200px; width:100%;
+  position:relative; z-index:10;
+}
+
+/* === IG CARD === */
+.ig-card {
+  background:linear-gradient(145deg,#0a0a18,#10101f);
+  border:1px solid rgba(255,0,128,.4);
+  box-shadow:0 0 60px rgba(255,0,128,.15),0 0 120px rgba(0,245,255,.08),inset 0 0 40px rgba(0,0,0,.5);
+  border-radius:4px;
+  padding:32px 28px;
+  position:relative;
+  overflow:hidden;
+}
+.ig-card::before {
+  content:'INSTAGRAM';
+  position:absolute; top:14px; right:16px;
+  font-family:'Share Tech Mono',monospace; font-size:.5rem; letter-spacing:.3em; color:rgba(255,0,128,.4);
+}
+.ig-card::after {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,var(--neon-pink),var(--neon-magenta),var(--neon-cyan));
+}
+
+/* Profile top */
+.ig-profile-top { display:flex; align-items:center; gap:20px; margin-bottom:20px; }
+
+/* Avatar with animated IG ring */
+.ig-avatar-wrap { position:relative; flex-shrink:0; }
+.ig-avatar-ring {
+  width:90px; height:90px; border-radius:50%;
+  background:conic-gradient(var(--neon-pink),var(--neon-yellow),var(--neon-magenta),var(--neon-cyan),var(--neon-pink));
+  padding:3px;
+  animation:ring-spin 4s linear infinite;
+  display:flex; align-items:center; justify-content:center;
+}
+@keyframes ring-spin { 100%{transform:rotate(360deg)} }
+.ig-avatar {
+  width:84px; height:84px; border-radius:50%;
+  background:linear-gradient(135deg,#1a0a2e,#0a1a2e);
+  border:3px solid var(--black);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Bebas Neue',sans-serif; font-size:2.2rem; color:white;
+  overflow:hidden;
+}
+.ig-avatar img { width:100%; height:100%; object-fit:cover; }
+
+.ig-profile-info { flex:1; min-width:0; }
+.ig-name-row { display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+.ig-name { font-family:'Orbitron',monospace; font-size:.95rem; font-weight:900; color:white; letter-spacing:.05em; }
+
+/* Verified badge */
+.ig-verified {
+  width:18px; height:18px; border-radius:50%;
+  background:linear-gradient(135deg,#0095f6,#005dc5);
+  display:inline-flex; align-items:center; justify-content:center;
+  box-shadow:0 0 8px rgba(0,149,246,.6);
+  flex-shrink:0;
+}
+.ig-verified::after { content:'✓'; color:white; font-size:.6rem; font-weight:900; }
+
+.ig-handle { font-family:'Share Tech Mono',monospace; font-size:.7rem; color:var(--neon-pink); letter-spacing:.05em; margin-bottom:6px; }
+.ig-handle a { color:inherit; text-decoration:none; }
+.ig-category { font-family:'Share Tech Mono',monospace; font-size:.6rem; color:var(--dim); letter-spacing:.1em; text-transform:uppercase; }
+
+/* Stats row */
+.ig-stats {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:0; border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.06);
+  margin:16px 0;
+}
+.ig-stat { text-align:center; padding:14px 8px; }
+.ig-stat-n { font-family:'Orbitron',monospace; font-size:1rem; font-weight:900; color:white; display:block; }
+.ig-stat-l { font-family:'Share Tech Mono',monospace; font-size:.55rem; color:var(--dim); letter-spacing:.1em; text-transform:uppercase; margin-top:3px; }
+
+/* Bio */
+.ig-bio { font-size:.82rem; color:var(--text); line-height:1.65; margin-bottom:16px; font-family:'Inter',sans-serif; }
+.ig-bio strong { color:var(--neon-cyan); font-family:'Share Tech Mono',monospace; font-size:.75rem; }
+
+/* Bio link */
+.ig-link { display:inline-flex; align-items:center; gap:6px; font-family:'Share Tech Mono',monospace; font-size:.7rem; color:var(--neon-cyan); text-decoration:none; margin-bottom:20px; transition:color .3s; }
+.ig-link:hover { color:var(--neon-pink); }
+
+/* Action buttons */
+.ig-actions { display:flex; gap:8px; margin-bottom:20px; }
+.ig-btn {
+  flex:1; padding:9px 6px; font-family:'Share Tech Mono',monospace; font-size:.6rem; letter-spacing:.08em;
+  text-align:center; border:1px solid rgba(255,255,255,.15); color:var(--text); text-decoration:none;
+  text-transform:uppercase; transition:all .3s; cursor:pointer; background:rgba(255,255,255,.04);
+}
+.ig-btn.primary { background:rgba(255,0,128,.15); border-color:rgba(255,0,128,.4); color:var(--neon-pink); }
+.ig-btn:hover { background:rgba(255,255,255,.1); }
+.ig-btn.primary:hover { background:rgba(255,0,128,.3); }
+
+/* Mini post grid */
+.ig-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; margin-top:4px; }
+.ig-post {
+  aspect-ratio:1; background:linear-gradient(135deg,#0d0d20,#15151f);
+  border:1px solid rgba(255,255,255,.06);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden; position:relative; cursor:pointer; transition:all .3s;
+}
+.ig-post:hover { border-color:rgba(255,0,128,.5); }
+.ig-post img { width:100%; height:100%; object-fit:cover; }
+.ig-post-placeholder {
+  font-family:'Share Tech Mono',monospace; font-size:.45rem;
+  color:rgba(255,255,255,.2); letter-spacing:.1em; text-align:center; padding:8px;
+}
+.ig-post::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(255,0,128,.1),rgba(0,245,255,.05));
+  opacity:0; transition:opacity .3s;
+}
+.ig-post:hover::after { opacity:1; }
+/* Post gradient bg variety */
+.ig-post:nth-child(1) { background:linear-gradient(135deg,#1a001a,#0a0015); }
+.ig-post:nth-child(2) { background:linear-gradient(135deg,#001a1a,#00100a); }
+.ig-post:nth-child(3) { background:linear-gradient(135deg,#1a0a00,#100500); }
+.ig-post:nth-child(4) { background:linear-gradient(135deg,#0a001a,#050010); }
+.ig-post:nth-child(5) { background:linear-gradient(135deg,#001a0a,#001005); }
+.ig-post:nth-child(6) { background:linear-gradient(135deg,#1a1000,#100a00); }
+
+/* Hero right text */
+.hero-text { }
+.hero-badge {
+  display:inline-block; font-family:'Share Tech Mono',monospace; font-size:.6rem;
+  letter-spacing:.3em; color:var(--neon-yellow); border:1px solid rgba(255,238,0,.3);
+  padding:6px 16px; margin-bottom:28px; text-transform:uppercase;
+  animation:badgep 2.5s ease-in-out infinite;
+}
+@keyframes badgep { 0%,100%{box-shadow:0 0 8px rgba(255,238,0,.2)} 50%{box-shadow:0 0 20px rgba(255,238,0,.5),0 0 40px rgba(255,238,0,.2)} }
+
+.hero-name {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3rem,6vw,5.5rem);
+  line-height:.9; color:white; margin-bottom:16px; letter-spacing:.04em;
+}
+.hero-name .hl { color:var(--neon-pink); text-shadow:var(--glow-p); display:block; }
+
+.hero-mission {
+  font-family:'Share Tech Mono',monospace; font-size:.8rem; letter-spacing:.2em;
+  color:var(--neon-cyan); text-shadow:var(--glow-c); text-transform:uppercase;
+  margin-bottom:24px; animation:flk 5s ease infinite;
+}
+@keyframes flk { 0%,93%,100%{opacity:1} 94%{opacity:.3} 96%{opacity:1} 98%{opacity:.2} }
+
+.hero-desc { color:var(--dim); line-height:1.8; font-size:.9rem; margin-bottom:36px; max-width:480px; }
+.hero-desc strong { color:white; }
+
+.community-total {
+  display:flex; align-items:baseline; gap:12px; margin-bottom:36px;
+}
+.community-n { font-family:'Orbitron',monospace; font-size:2rem; font-weight:900; color:var(--neon-yellow); text-shadow:var(--glow-y); }
+.community-l { font-family:'Share Tech Mono',monospace; font-size:.65rem; color:var(--dim); letter-spacing:.2em; text-transform:uppercase; }
+
+.hero-ctas { display:flex; gap:12px; flex-wrap:wrap; }
+.btn {
+  font-family:'Orbitron',monospace; font-size:.65rem; font-weight:700; letter-spacing:.15em;
+  text-transform:uppercase; text-decoration:none; padding:14px 28px;
+  position:relative; overflow:hidden; transition:all .3s; display:inline-block; cursor:pointer; border:none;
+  clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);
+}
+.btn-pink { background:linear-gradient(135deg,var(--neon-pink),var(--neon-magenta)); color:white; box-shadow:0 0 25px rgba(255,0,128,.4); }
+.btn-pink:hover { box-shadow:0 0 45px rgba(255,0,128,.7),0 0 80px rgba(255,0,128,.3); transform:translateY(-2px); }
+.btn-outline { background:transparent; color:var(--neon-cyan); border:1.5px solid var(--neon-cyan); box-shadow:0 0 15px rgba(0,245,255,.2); }
+.btn-outline:hover { background:rgba(0,245,255,.08); box-shadow:0 0 35px rgba(0,245,255,.5); transform:translateY(-2px); }
+
+/* Scroll cue */
+.scroll-cue {
+  position:absolute; bottom:36px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:8px; z-index:10;
+}
+.scroll-cue span { font-family:'Share Tech Mono',monospace; font-size:.55rem; letter-spacing:.3em; color:var(--dim); text-transform:uppercase; }
+.scroll-line { width:1px; height:40px; background:linear-gradient(var(--neon-cyan),transparent); animation:scl 1.5s ease infinite; }
+@keyframes scl { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 50.01%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+
+/* ====== SECTIONS ====== */
+section { position:relative; z-index:2; }
+.si { max-width:1200px; margin:0 auto; padding:100px 40px; }
+.divider { height:1px; background:linear-gradient(90deg,transparent,var(--neon-pink) 30%,var(--neon-cyan) 70%,transparent); box-shadow:0 0 15px rgba(255,0,128,.3); }
+.slabel { font-family:'Share Tech Mono',monospace; font-size:.6rem; letter-spacing:.4em; text-transform:uppercase; color:var(--neon-cyan); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+.slabel::before { content:''; display:block; width:24px; height:1px; background:var(--neon-cyan); box-shadow:var(--glow-c); }
+.stitle { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,6vw,5.5rem); line-height:.9; color:white; margin-bottom:20px; }
+.stitle .p { color:var(--neon-pink); text-shadow:var(--glow-p); }
+.stitle .c { color:var(--neon-cyan); text-shadow:var(--glow-c); }
+
+/* Reveal */
+.rv { opacity:0; transform:translateY(35px); transition:opacity .8s ease,transform .8s ease; }
+.rv.on { opacity:1; transform:translateY(0); }
+.rl { opacity:0; transform:translateX(-35px); transition:opacity .8s ease,transform .8s ease; }
+.rl.on { opacity:1; transform:translateX(0); }
+.rr { opacity:0; transform:translateX(35px); transition:opacity .8s ease,transform .8s ease; }
+.rr.on { opacity:1; transform:translateX(0); }
+.st { transition-delay:calc(var(--i,0) * .1s); }
+
+/* ====== SOBRE MÍ ====== */
+#sobre { background:var(--deep); }
+#sobre::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 80% 50%,rgba(0,245,255,.04),transparent 60%); pointer-events:none; }
+
+.sobre-grid { display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:start; }
+.sobre-text p { color:var(--dim); line-height:1.9; font-size:.92rem; margin-bottom:18px; }
+.sobre-text strong { color:white; }
+.sobre-text p em { color:var(--neon-cyan); font-style:normal; font-family:'Share Tech Mono',monospace; font-size:.8rem; }
+
+.expertise-pills { display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; }
+.pill {
+  font-family:'Share Tech Mono',monospace; font-size:.6rem; letter-spacing:.1em; text-transform:uppercase;
+  padding:7px 14px; border:1px solid rgba(0,245,255,.25); color:var(--neon-cyan);
+  background:rgba(0,245,255,.04); transition:all .3s; cursor:default;
+}
+.pill:hover { border-color:var(--neon-cyan); box-shadow:0 0 15px rgba(0,245,255,.3); background:rgba(0,245,255,.08); }
+.pill.pink { border-color:rgba(255,0,128,.25); color:var(--neon-pink); background:rgba(255,0,128,.04); }
+.pill.pink:hover { border-color:var(--neon-pink); box-shadow:0 0 15px rgba(255,0,128,.3); }
+.pill.yellow { border-color:rgba(255,238,0,.25); color:var(--neon-yellow); background:rgba(255,238,0,.04); }
+
+.quote-block {
+  border-left:3px solid var(--neon-pink); padding:20px 24px;
+  background:rgba(255,0,128,.04); margin-top:30px;
+}
+.quote-block blockquote { font-size:.9rem; color:var(--text); line-height:1.8; font-style:italic; margin-bottom:10px; }
+.quote-block cite { font-family:'Share Tech Mono',monospace; font-size:.65rem; color:var(--neon-pink); letter-spacing:.1em; }
+
+/* Coleccion timeline box */
+.coleccion-box { border:1px solid rgba(255,238,0,.2); padding:32px; background:rgba(255,238,0,.02); }
+.coleccion-box h3 { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:var(--neon-yellow); text-shadow:var(--glow-y); letter-spacing:.1em; margin-bottom:20px; }
+.coleccion-items { display:flex; flex-direction:column; gap:12px; }
+.col-item { display:flex; gap:16px; align-items:flex-start; }
+.col-year { font-family:'Orbitron',monospace; font-size:.65rem; font-weight:700; color:var(--neon-yellow); min-width:50px; padding-top:2px; }
+.col-desc { font-family:'Share Tech Mono',monospace; font-size:.7rem; color:var(--dim); line-height:1.6; }
+.col-desc strong { color:var(--text); }
+
+/* ====== PROYECTOS ====== */
+#proyectos { }
+#proyectos::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 20% 50%,rgba(255,0,128,.04),transparent 60%); pointer-events:none; }
+
+.proyectos-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.proy-card {
+  border:1px solid rgba(255,0,128,.15); padding:36px 32px;
+  background:rgba(255,0,128,.02); position:relative; overflow:hidden;
+  transition:all .4s; cursor:default;
+}
+.proy-card::before { content:''; position:absolute; top:0; left:0; width:100%; height:2px; background:linear-gradient(90deg,var(--neon-pink),var(--neon-magenta)); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
+.proy-card:hover::before { transform:scaleX(1); }
+.proy-card:hover { border-color:rgba(255,0,128,.4); box-shadow:0 20px 60px rgba(255,0,128,.1); transform:translateY(-4px); }
+.proy-num { font-family:'Bebas Neue',sans-serif; font-size:4rem; color:rgba(255,0,128,.08); line-height:1; margin-bottom:8px; }
+.proy-tag { font-family:'Share Tech Mono',monospace; font-size:.55rem; letter-spacing:.25em; color:var(--neon-pink); text-transform:uppercase; margin-bottom:12px; }
+.proy-title { font-family:'Orbitron',monospace; font-size:.9rem; font-weight:700; color:white; margin-bottom:12px; letter-spacing:.05em; }
+.proy-desc { font-size:.82rem; color:var(--dim); line-height:1.7; }
+.proy-link { display:inline-block; margin-top:20px; font-family:'Share Tech Mono',monospace; font-size:.65rem; color:var(--neon-cyan); letter-spacing:.1em; text-decoration:none; border-bottom:1px solid rgba(0,245,255,.3); transition:all .3s; }
+.proy-link:hover { color:var(--neon-pink); border-color:rgba(255,0,128,.4); }
+
+/* Featured project (DeLorean) */
+.proy-card.featured {
+  border-color:rgba(0,245,255,.25);
+  background:rgba(0,245,255,.02);
+  grid-column:1/-1;
+  display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;
+}
+.proy-card.featured::before { background:linear-gradient(90deg,var(--neon-cyan),var(--neon-pink)); }
+.proy-card.featured:hover { border-color:rgba(0,245,255,.5); box-shadow:0 20px 60px rgba(0,245,255,.08); }
+.proy-card.featured .proy-tag { color:var(--neon-cyan); }
+.proy-card.featured .proy-link { color:var(--neon-yellow); border-color:rgba(255,238,0,.3); }
+
+.delorean-vis {
+  aspect-ratio:16/9; border:1px solid rgba(0,245,255,.2);
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg,#030316,#050520);
+  position:relative; overflow:hidden;
+}
+.delorean-vis::before { content:'LIVE CAM'; position:absolute; top:10px; left:12px; font-family:'Share Tech Mono',monospace; font-size:.5rem; letter-spacing:.2em; color:rgba(0,245,255,.4); }
+.delorean-vis::after { content:'● REC'; position:absolute; top:10px; right:12px; font-family:'Share Tech Mono',monospace; font-size:.5rem; letter-spacing:.1em; color:var(--neon-red); animation:rb 1s ease infinite; }
+@keyframes rb { 0%,100%{opacity:1} 50%{opacity:0} }
+.dmc-ascii { font-family:'Share Tech Mono',monospace; font-size:.45rem; line-height:1.4; color:rgba(0,245,255,.7); text-shadow:0 0 8px rgba(0,245,255,.4); letter-spacing:.05em; animation:ascii-flk 6s ease infinite; }
+@keyframes ascii-flk { 0%,92%,100%{opacity:1} 93%{opacity:.2} 94%{opacity:1} }
+
+/* ====== GALERÍA ====== */
+#galeria { background:var(--deep); }
+.galeria-intro { max-width:600px; margin-bottom:50px; }
+.galeria-intro p { color:var(--dim); line-height:1.8; font-size:.9rem; }
+
+.gallery-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-template-rows:auto auto;
+  gap:10px;
+}
+.gpost {
+  border:1px solid rgba(255,255,255,.07); overflow:hidden;
+  position:relative; cursor:pointer; transition:all .4s;
+  display:flex; align-items:center; justify-content:center;
+}
+.gpost:first-child { grid-column:span 2; grid-row:span 2; }
+.gpost img { width:100%; height:100%; object-fit:cover; transition:transform .5s; display:block; }
+.gpost:hover img { transform:scale(1.06); }
+.gpost:hover { border-color:rgba(255,0,128,.5); box-shadow:0 0 30px rgba(255,0,128,.15); }
+.gpost-ph {
+  width:100%; padding-bottom:100%; position:relative; overflow:hidden;
+}
+.gpost:first-child .gpost-ph { padding-bottom:50%; }
+.gpost-ph-inner {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:8px;
+}
+.gpost-icon { font-size:1.4rem; }
+.gpost:first-child .gpost-icon { font-size:2.5rem; }
+.gpost-label { font-family:'Share Tech Mono',monospace; font-size:.5rem; letter-spacing:.15em; color:rgba(255,255,255,.2); text-transform:uppercase; text-align:center; padding:0 12px; }
+
+/* Gradient per post */
+.gpost:nth-child(1) { background:linear-gradient(135deg,#0f0020,#200030); }
+.gpost:nth-child(2) { background:linear-gradient(135deg,#001020,#002030); }
+.gpost:nth-child(3) { background:linear-gradient(135deg,#200010,#300015); }
+.gpost:nth-child(4) { background:linear-gradient(135deg,#001a10,#002a15); }
+.gpost:nth-child(5) { background:linear-gradient(135deg,#201000,#301800); }
+.gpost:nth-child(6) { background:linear-gradient(135deg,#100020,#180030); }
+.gpost:nth-child(7) { background:linear-gradient(135deg,#1a0a00,#200f00); }
+
+.gallery-cta { text-align:center; margin-top:32px; }
+.gallery-cta p { font-family:'Share Tech Mono',monospace; font-size:.65rem; color:var(--dim); letter-spacing:.1em; margin-bottom:16px; }
+
+/* ====== MÉTRICAS ====== */
+#metricas { }
+#metricas::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 100%,rgba(255,0,128,.06),transparent 60%); pointer-events:none; }
+
+.metrics-bar { display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:1px solid rgba(255,255,255,.06); margin-bottom:50px; }
+.metric {
+  padding:40px 30px; text-align:center; border-right:1px solid rgba(255,255,255,.06);
+  position:relative; overflow:hidden; transition:all .3s; cursor:default;
+}
+.metric:last-child { border-right:none; }
+.metric::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,0,128,.05),transparent); opacity:0; transition:opacity .3s; }
+.metric:hover::before { opacity:1; }
+.metric:hover { background:rgba(255,255,255,.01); }
+.metric-n { font-family:'Orbitron',monospace; font-size:2.2rem; font-weight:900; color:var(--neon-pink); text-shadow:var(--glow-p); display:block; margin-bottom:8px; }
+.metric-n.c { color:var(--neon-cyan); text-shadow:var(--glow-c); }
+.metric-n.y { color:var(--neon-yellow); text-shadow:var(--glow-y); }
+.metric-l { font-family:'Share Tech Mono',monospace; font-size:.6rem; color:var(--dim); letter-spacing:.15em; text-transform:uppercase; }
+
+/* ====== CONTACTO / FOOTER ====== */
+footer { position:relative; z-index:2; background:var(--deep); border-top:1px solid rgba(0,245,255,.08); }
+.fi { max-width:1200px; margin:0 auto; padding:80px 40px 40px; }
+
+.footer-top { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:60px; margin-bottom:60px; }
+
+.fbrand .logo { font-family:'Orbitron',monospace; font-size:1.6rem; font-weight:900; letter-spacing:.3em; color:white; text-shadow:var(--glow-c); margin-bottom:8px; }
+.fbrand .logo span { color:var(--neon-cyan); }
+.fbrand .handle { font-family:'Share Tech Mono',monospace; font-size:.7rem; color:var(--neon-pink); letter-spacing:.1em; margin-bottom:16px; }
+.fbrand p { font-size:.82rem; color:var(--dim); line-height:1.7; max-width:280px; margin-bottom:24px; }
+
+.socials { display:flex; gap:10px; flex-wrap:wrap; }
+.social {
+  padding:8px 14px; border:1px solid rgba(255,0,128,.25); color:var(--dim);
+  font-family:'Share Tech Mono',monospace; font-size:.6rem; letter-spacing:.1em;
+  text-decoration:none; text-transform:uppercase; transition:all .3s;
+}
+.social:hover { color:var(--neon-pink); border-color:var(--neon-pink); box-shadow:0 0 15px rgba(255,0,128,.2); }
+.social.ig { color:var(--neon-pink); border-color:rgba(255,0,128,.4); }
+.social.yt { color:var(--neon-red); border-color:rgba(255,26,26,.3); }
+.social.yt:hover { border-color:var(--neon-red); box-shadow:0 0 15px rgba(255,26,26,.2); }
+.social.tw { border-color:rgba(255,255,255,.15); }
+
+.fcol h4 { font-family:'Orbitron',monospace; font-size:.65rem; font-weight:700; letter-spacing:.2em; color:white; text-transform:uppercase; margin-bottom:18px; }
+.fcol ul { list-style:none; }
+.fcol ul li { margin-bottom:10px; }
+.fcol ul li a { font-family:'Share Tech Mono',monospace; font-size:.7rem; color:var(--dim); text-decoration:none; letter-spacing:.05em; transition:color .3s; }
+.fcol ul li a:hover { color:var(--neon-cyan); }
+.fcol p { font-family:'Share Tech Mono',monospace; font-size:.72rem; color:var(--dim); line-height:1.8; }
+.fcol a { color:var(--neon-cyan); text-decoration:none; }
+
+.footer-bottom { border-top:1px solid rgba(255,255,255,.04); padding-top:28px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+.footer-bottom p { font-family:'Share Tech Mono',monospace; font-size:.6rem; color:var(--dim); letter-spacing:.1em; }
+.footer-bottom span { color:var(--neon-pink); }
+
+/* ====== RESPONSIVE ====== */
+@media(max-width:1024px) {
+  .hero-layout { grid-template-columns:1fr; gap:50px; }
+  .ig-card { max-width:420px; margin:0 auto; }
+  .sobre-grid { grid-template-columns:1fr; gap:40px; }
+  .proyectos-grid { grid-template-columns:1fr; }
+  .proy-card.featured { grid-column:auto; display:block; }
+  .gallery-grid { grid-template-columns:repeat(3,1fr); }
+  .gallery-grid .gpost:first-child { grid-column:span 2; }
+  .metrics-bar { grid-template-columns:repeat(2,1fr); }
+  .metric { border-bottom:1px solid rgba(255,255,255,.06); }
+  .footer-top { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:768px) {
+  .si { padding:70px 20px; }
+  nav { padding:0 20px; }
+  .nav-links { display:none; }
+  .gallery-grid { grid-template-columns:1fr 1fr; }
+  .gallery-grid .gpost:first-child { grid-column:span 2; }
+  .footer-top { grid-template-columns:1fr; }
+  body { cursor:auto; }
+  .cur,.cur-r { display:none; }
+  .hero-layout { padding-top:0; }
+}
+</style>
+</head>
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur-r" id="curR"></div>
+<div class="grid-bg"></div>
+<div class="scanlines"></div>
+<canvas id="ptc"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">C<span>URRO</span>.EXE</a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Bio</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#metricas">Stats</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://www.instagram.com/currozooo" target="_blank" class="nav-ig">@currozooo</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="stars-bg" id="stbg"></div>
+  <div class="hw-floor"></div>
+  <div class="hw-horizon"></div>
+  <div class="hw-sun"></div>
+
+  <div class="hero-layout">
+
+    <!-- IG CARD -->
+    <div class="ig-card rv">
+      <div class="ig-profile-top">
+        <div class="ig-avatar-wrap">
+          <div class="ig-avatar-ring">
+            <div class="ig-avatar">
+              <img src="assets/instagram/profile.jpg" alt="Curro ZOOO" onerror="this.style.display='none';this.parentNode.innerHTML='C'">
+            </div>
+          </div>
+        </div>
+        <div class="ig-profile-info">
+          <div class="ig-name-row">
+            <span class="ig-name">Curro Quevedo</span>
+            <span class="ig-verified" title="Verificado"></span>
+          </div>
+          <p class="ig-handle"><a href="https://www.instagram.com/currozooo" target="_blank">@currozooo</a></p>
+          <p class="ig-category">Fundador · ZOOO Madrid</p>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="ig-stats">
+        <div class="ig-stat">
+          <span class="ig-stat-n">275+</span>
+          <span class="ig-stat-l">Posts</span>
+        </div>
+        <div class="ig-stat">
+          <span class="ig-stat-n">∞</span>
+          <span class="ig-stat-l">Seguidores</span>
+        </div>
+        <div class="ig-stat">
+          <span class="ig-stat-n">29</span>
+          <span class="ig-stat-l">Años ZOOO</span>
+        </div>
+      </div>
+
+      <!-- Bio -->
+      <p class="ig-bio">
+        <strong>🏪 ZOOO Madrid</strong> — Expertos en electrónica desde 1997.<br>
+        <strong>🕹 ZOOO Arcade</strong> — 42 máquinas originales en ABC Serrano.<br>
+        <strong>🚗 DeLorean DMC-12</strong> — 88 MPH y a donde quieras.<br>
+        <strong>📱 +1.500 móviles</strong> — Colección Guinness en curso.<br>
+        <em>// "Esto no es un negocio, es una forma de vida."</em>
+      </p>
+
+      <a href="https://www.zooo.es" target="_blank" class="ig-link">🔗 zooo.es</a>
+
+      <!-- Actions -->
+      <div class="ig-actions">
+        <a href="mailto:info@zooo.es" class="ig-btn primary">Contactar</a>
+        <a href="https://www.zooo.es/arcade" target="_blank" class="ig-btn">Arcade</a>
+        <a href="https://www.instagram.com/currozooo" target="_blank" class="ig-btn">Seguir IG</a>
+      </div>
+
+      <!-- Mini grid posts -->
+      <div class="ig-grid">
+        <div class="ig-post"><img src="assets/instagram/post-1.jpg" alt="" onerror="this.style.display='none'"><div class="ig-post-placeholder">🕹<br>ARCADE</div></div>
+        <div class="ig-post"><img src="assets/instagram/post-2.jpg" alt="" onerror="this.style.display='none'"><div class="ig-post-placeholder">🚗<br>DELOREAN</div></div>
+        <div class="ig-post"><img src="assets/instagram/post-3.jpg" alt="" onerror="this.style.display='none'"><div class="ig-post-placeholder">📱<br>COLECCIÓN</div></div>
+        <div class="ig-post"><img src="assets/instagram/post-4.jpg" alt="" onerror="this.style.display='none'"><div class="ig-post-placeholder">⚡<br>REPAIR</div></div>
+        <div class="ig-post"><img src="assets/instagram/post-5.jpg" alt="" onerror="this.style.display='none'"><div class="ig-post-placeholder">🏆<br>GUINNESS</div></div>
+        <div class="ig-post"><img src="assets/instagram/post-6.jpg" alt="" onerror="this.style.display='none'"><div class="ig-post-placeholder">🎮<br>ZOOO</div></div>
+      </div>
+    </div>
+
+    <!-- HERO TEXT -->
+    <div class="hero-text rv" style="transition-delay:.2s">
+      <div class="hero-badge">Madrid · España · desde 1997</div>
+
+      <h1 class="hero-name">
+        CURRO<br>
+        <span class="hl">QUEVEDO</span>
+        ZOOO
+      </h1>
+
+      <p class="hero-mission">Arcade · Electrónica · DeLorean · Coleccionista</p>
+
+      <p class="hero-desc">
+        Fundador de <strong>ZOOO</strong> — el rincón de Madrid donde la tecnología se convierte en pasión.
+        Desde reparar el primer móvil que encontró a los 15 años hasta montar
+        <strong>42 máquinas arcade originales</strong> en ABC Serrano.
+        Todo con el mismo espíritu: hacer de esto <strong>una forma de vida</strong>.
+      </p>
+
+      <div class="community-total">
+        <span class="community-n">1997</span>
+        <span class="community-l">Año en que empezó todo<br>y no ha parado desde entonces</span>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="https://www.instagram.com/currozooo" target="_blank" class="btn btn-pink">📸 Ver Instagram</a>
+        <a href="#proyectos" class="btn btn-outline">Mis Proyectos</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOBRE MÍ -->
+<section id="sobre">
+  <div class="si">
+    <p class="slabel rv">02 — Bio</p>
+    <h2 class="stitle rv">SOBRE <span class="p">CURRO</span></h2>
+
+    <div class="sobre-grid">
+      <div class="rl">
+        <p>Todo empezó con un móvil encontrado en el suelo. <strong>Curro Quevedo</strong> tenía 15 años cuando recogió un Airtel sin batería de la acera de Madrid. Ese momento cambió todo.</p>
+        <p>Casi <strong>tres décadas después</strong>, Curro es el fundador de ZOOO — un universo propio en Madrid donde conviven la reparación de electrónica, una de las mayores colecciones de móviles del mundo, 42 máquinas arcade originales de los 80s y 90s, y un DeLorean DMC-12 aparcado con toda la naturalidad del mundo.</p>
+        <p>Es <em>Apple Independent Repair Provider</em> oficial, coleccionista obsesivo, restaurador de recreativas, y el tipo que un día decidió montar el mejor arcade clásico de Madrid porque <strong>podía</strong>.</p>
+
+        <div class="quote-block rv" style="transition-delay:.2s">
+          <blockquote>"Esto no es un negocio, se ha convertido en una forma de vida."</blockquote>
+          <cite>— Curro Quevedo, fundador ZOOO</cite>
+        </div>
+
+        <div class="expertise-pills rv" style="transition-delay:.3s">
+          <span class="pill">Electrónica</span>
+          <span class="pill">Apple IRP</span>
+          <span class="pill pink">Arcade Clásico</span>
+          <span class="pill pink">JAMMA Boards</span>
+          <span class="pill yellow">DeLorean DMC-12</span>
+          <span class="pill">Recuperación Datos</span>
+          <span class="pill pink">Coleccionismo</span>
+          <span class="pill">Reparación MacBook</span>
+          <span class="pill yellow">+1.500 Móviles</span>
+          <span class="pill">Historia Tecnología</span>
+        </div>
+      </div>
+
+      <div class="rr">
+        <div class="coleccion-box">
+          <h3>🏆 COLECCIÓN GUINNESS</h3>
+          <p style="font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--dim);margin-bottom:20px;letter-spacing:.05em;line-height:1.7">+1.500 teléfonos. Récord actual: 1.563. La historia de la telefonía en un solo lugar.</p>
+          <div class="coleccion-items">
+            <div class="col-item">
+              <span class="col-year">1985</span>
+              <span class="col-desc"><strong>DynaTAC 8000s</strong> — El primer móvil comercial. El que usaba Gordon Gekko.</span>
+            </div>
+            <div class="col-item">
+              <span class="col-year">1986</span>
+              <span class="col-desc"><strong>Indelec i4007</strong> — El primer móvil fabricado en España.</span>
+            </div>
+            <div class="col-item">
+              <span class="col-year">1994</span>
+              <span class="col-desc"><strong>Nokia 8110</strong> — El "Banana Phone" de Matrix.</span>
+            </div>
+            <div class="col-item">
+              <span class="col-year">1999</span>
+              <span class="col-desc"><strong>StarTAC 1300</strong> — Supuestamente de Emilio Botín.</span>
+            </div>
+            <div class="col-item">
+              <span class="col-year">2004</span>
+              <span class="col-desc"><strong>Mitsubishi Trium T110</strong> — Usado en los atentados del 11-M.</span>
+            </div>
+            <div class="col-item">
+              <span class="col-year">Now</span>
+              <span class="col-desc"><strong>+1.500 dispositivos</strong> — Y contando. Record en proceso.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROYECTOS -->
+<section id="proyectos">
+  <div class="si">
+    <p class="slabel rv">03 — Proyectos</p>
+    <h2 class="stitle rv">LO QUE <span class="c">HACE</span></h2>
+
+    <div class="proyectos-grid">
+
+      <!-- FEATURED: DeLorean -->
+      <div class="proy-card featured rv">
+        <div class="delorean-vis">
+          <div class="dmc-ascii">
+____________________________<br>
+|  ___  |  _  |  DMC  |   |<br>
+| |   | | | | | |   | |   |<br>
+| |___| | |_| | |___| |   |<br>
+|_______|_____|_______| 88 |<br>
+&nbsp;.-----.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.-----.<br>
+&nbsp;| O O |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| O O |<br>
+&nbsp;'-----'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'-----'
+          </div>
+        </div>
+        <div>
+          <div class="proy-num">00</div>
+          <div class="proy-tag">El Proyecto Imposible</div>
+          <h3 class="proy-title">El DeLorean DMC-12</h3>
+          <p class="proy-desc">Porque si vas a tener un coche, que sea el DeLorean. Curro conduce uno por Madrid con la misma naturalidad con la que repara un iPhone. Símbolo de ZOOO, de los 80s, y de que algunas cosas simplemente molan.</p>
+          <a href="https://www.instagram.com/currozooo" target="_blank" class="proy-link">Ver en @currozooo →</a>
+        </div>
+      </div>
+
+      <!-- ZOOO Arcade -->
+      <div class="proy-card rv st" style="--i:1">
+        <div class="proy-num">01</div>
+        <div class="proy-tag">ABC Serrano · Madrid</div>
+        <h3 class="proy-title">ZOOO Arcade 2.0</h3>
+        <p class="proy-desc">42 máquinas arcade originales de los 80s y 90s. Hardware real, gabinetes impecables. El mejor arcade clásico de Madrid. Jue-Vie 17h, Sáb-Dom 12h. Desde 4,90€.</p>
+        <a href="https://www.zooo.es/arcade" target="_blank" class="proy-link">Comprar entradas →</a>
+      </div>
+
+      <!-- ZOOO Electrónica -->
+      <div class="proy-card rv st" style="--i:2">
+        <div class="proy-num">02</div>
+        <div class="proy-tag">Desde 1997</div>
+        <h3 class="proy-title">ZOOO Electrónica</h3>
+        <p class="proy-desc">Reparación de móviles, MacBook, tablets, drones DJI, smartwatches, Surface. Apple Independent Repair Provider oficial. Garantía 3 meses. Acepta criptomonedas.</p>
+        <a href="https://www.zooo.es" target="_blank" class="proy-link">zooo.es →</a>
+      </div>
+
+      <!-- Colección Móviles -->
+      <div class="proy-card rv st" style="--i:3">
+        <div class="proy-num">03</div>
+        <div class="proy-tag">Récord Guinness en curso</div>
+        <h3 class="proy-title">Colección de Móviles</h3>
+        <p class="proy-desc">+1.500 teléfonos desde los años 80. DynaTAC 8000s, Nokia 8110, terminales históricos de España y el mundo. Proyecto de museo interactivo en desarrollo.</p>
+        <a href="https://www.eldiario.es/hojaderouter/tecnologia/moviles/zooo-curro-quevedo-moviles-record-guinness_1_2289682.html" target="_blank" class="proy-link">Leer historia →</a>
+      </div>
+
+      <!-- Arcade 3.0 -->
+      <div class="proy-card rv st" style="--i:4">
+        <div class="proy-num">04</div>
+        <div class="proy-tag">Coming Soon · 2025</div>
+        <h3 class="proy-title">ZOOO Arcade Batalla 3.0</h3>
+        <p class="proy-desc">El próximo capítulo de ZOOO Arcade. Curro no para. La historia continúa. Stay tuned en @currozooo para ser el primero en enterarte.</p>
+        <a href="https://www.instagram.com/currozooo" target="_blank" class="proy-link">Seguir en IG →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="si">
+    <p class="slabel rv">04 — Feed</p>
+    <h2 class="stitle rv">GALERÍA <span class="p">IG</span></h2>
+
+    <div class="galeria-intro rv">
+      <p>Fotos del día a día de Curro — arcades, el DeLorean por Madrid, reparaciones épicas y la colección de móviles. Sigue a <strong style="color:white">@currozooo</strong> en Instagram para el contenido en tiempo real.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gpost rv st" style="--i:0">
+        <div class="gpost-ph"><div class="gpost-ph-inner"><span class="gpost-icon">🕹</span><span class="gpost-label">ZOOO Arcade<br>42 máquinas originales</span></div></div>
+      </div>
+      <div class="gpost rv st" style="--i:1">
+        <div class="gpost-ph"><div class="gpost-ph-inner"><span class="gpost-icon">🚗</span><span class="gpost-label">DeLorean<br>por Madrid</span></div></div>
+      </div>
+      <div class="gpost rv st" style="--i:2">
+        <div class="gpost-ph"><div class="gpost-ph-inner"><span class="gpost-icon">📱</span><span class="gpost-label">Colección<br>+1.500 móviles</span></div></div>
+      </div>
+      <div class="gpost rv st" style="--i:3">
+        <div class="gpost-ph"><div class="gpost-ph-inner"><span class="gpost-icon">⚙</span><span class="gpost-label">Reparación<br>electrónica</span></div></div>
+      </div>
+      <div class="gpost rv st" style="--i:4">
+        <div class="gpost-ph"><div class="gpost-ph-inner"><span class="gpost-icon">🏆</span><span class="gpost-label">Guinness<br>Record</span></div></div>
+      </div>
+      <div class="gpost rv st" style="--i:5">
+        <div class="gpost-ph"><div class="gpost-ph-inner"><span class="gpost-icon">🎮</span><span class="gpost-label">Retro gaming<br>original HW</span></div></div>
+      </div>
+      <div class="gpost rv st" style="--i:6">
+        <div class="gpost-ph"><div class="gpost-ph-inner"><span class="gpost-icon">🔧</span><span class="gpost-label">MacBook<br>Apple IRP</span></div></div>
+      </div>
+    </div>
+
+    <div class="gallery-cta rv">
+      <p>[ Añade tus fotos reales en assets/instagram/ para sustituir los placeholders ]</p>
+      <a href="https://www.instagram.com/currozooo" target="_blank" class="btn btn-pink">📸 Ver perfil completo</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MÉTRICAS -->
+<section id="metricas">
+  <div class="si">
+    <p class="slabel rv">05 — Stats</p>
+    <h2 class="stitle rv">EN <span class="c">NÚMEROS</span></h2>
+
+    <div class="metrics-bar rv">
+      <div class="metric">
+        <span class="metric-n counter" data-target="29">0</span>
+        <span class="metric-l">Años en activo</span>
+      </div>
+      <div class="metric">
+        <span class="metric-n c counter" data-target="42">0</span>
+        <span class="metric-l">Máquinas Arcade</span>
+      </div>
+      <div class="metric">
+        <span class="metric-n y counter" data-target="1500">0</span>
+        <span class="metric-l">Móviles en colección</span>
+      </div>
+      <div class="metric">
+        <span class="metric-n counter" data-target="88">0</span>
+        <span class="metric-l">MPH del DeLorean</span>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(255,255,255,.06)" class="rv">
+      <div style="padding:30px;border-right:1px solid rgba(255,255,255,.06);text-align:center">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:white;margin-bottom:8px">Apple IRP Oficial</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--dim);letter-spacing:.1em">Independent Repair Provider</div>
+      </div>
+      <div style="padding:30px;border-right:1px solid rgba(255,255,255,.06);text-align:center">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:white;margin-bottom:8px">Garantía 3 Meses</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--dim);letter-spacing:.1em">En todas las reparaciones</div>
+      </div>
+      <div style="padding:30px;text-align:center">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:white;margin-bottom:8px">Acepta Cripto</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--dim);letter-spacing:.1em">Bitcoin y más</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER / CONTACTO -->
+<footer id="contacto">
+  <div class="fi">
+    <div class="footer-top">
+      <div class="fbrand rv">
+        <div class="logo">C<span>URRO</span></div>
+        <div class="handle">@currozooo</div>
+        <p>Fundador de ZOOO Madrid. Arcade, electrónica, DeLorean y colección de móviles. Una forma de vida desde 1997.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/currozooo" target="_blank" class="social ig">@currozooo</a>
+          <a href="https://www.instagram.com/zooo_es/" target="_blank" class="social ig">@zooo_es</a>
+          <a href="https://twitter.com/Curroquevedo" target="_blank" class="social tw">X/Twitter</a>
+          <a href="https://www.facebook.com/zooo.es/" target="_blank" class="social">Facebook</a>
+        </div>
+      </div>
+
+      <div class="fcol rv st" style="--i:1">
+        <h4>ZOOO</h4>
+        <ul>
+          <li><a href="https://www.zooo.es" target="_blank">zooo.es</a></li>
+          <li><a href="https://www.zooo.es/arcade" target="_blank">Arcade 2.0</a></li>
+          <li><a href="https://store.zooo.es" target="_blank">Tienda Online</a></li>
+          <li><a href="https://www.zooo.es/portal-cliente/" target="_blank">Portal Cliente</a></li>
+        </ul>
+      </div>
+
+      <div class="fcol rv st" style="--i:2">
+        <h4>Contacto</h4>
+        <p>
+          <strong style="color:white">ZOOO Arcade</strong><br>
+          ABC Serrano, Planta 1<br>
+          Paseo de la Castellana, 34<br>
+          28046 Madrid<br><br>
+          📞 <a href="tel:+34915021529">915 021 529</a><br>
+          ✉ <a href="mailto:info@zooo.es">info@zooo.es</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 <span>Curro Quevedo</span> · ZOOO Madrid</p>
+      <p>Hecho con <span>♥</span> neones y 88 MPH</p>
+      <p><span>Desde 1997</span> · Expertos en electrónica</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// --- STARS ---
+const sb = document.getElementById('stbg');
+for(let i=0;i<100;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  const sz=Math.random()*2+0.5;
+  s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*60}%;--d:${2+Math.random()*4}s;--dl:${Math.random()*4}s;`;
+  sb.appendChild(s);
+}
+
+// --- PARTICLES ---
+const cv=document.getElementById('ptc'),ctx=cv.getContext('2d');
+let W,H,pts;
+const resize=()=>{ W=cv.width=innerWidth; H=cv.height=innerHeight; };
+const init=()=>{ pts=Array.from({length:50},()=>({ x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:Math.random()*1.5+.5,c:['#ff0080','#00f5ff','#ffee00','#ff00ff'][Math.floor(Math.random()*4)],a:Math.random()*.4+.1 })); };
+const draw=()=>{
+  ctx.clearRect(0,0,W,H);
+  pts.forEach(p=>{ p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.save();ctx.globalAlpha=p.a;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c;ctx.shadowBlur=8;ctx.shadowColor=p.c;ctx.fill();ctx.restore(); });
+  requestAnimationFrame(draw);
+};
+resize();init();draw();
+window.addEventListener('resize',()=>{resize();init();});
+
+// --- CURSOR ---
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function animCur(){
+  if(cur){cur.style.left=mx+'px';cur.style.top=my+'px';}
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  if(curR){curR.style.left=rx+'px';curR.style.top=ry+'px';}
+  requestAnimationFrame(animCur);
+})();
+document.querySelectorAll('a,button,.proy-card,.gpost,.metric').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ if(cur){cur.style.width='18px';cur.style.height='18px';cur.style.background='var(--neon-pink)';} if(curR){curR.style.width='46px';curR.style.height='46px';} });
+  el.addEventListener('mouseleave',()=>{ if(cur){cur.style.width='10px';cur.style.height='10px';cur.style.background='var(--neon-cyan)';} if(curR){curR.style.width='32px';curR.style.height='32px';} });
+});
+
+// --- NAV ---
+window.addEventListener('scroll',()=>{ document.getElementById('nav').classList.toggle('s',scrollY>50); },{passive:true});
+
+// --- PARALLAX ---
+window.addEventListener('scroll',()=>{
+  const y=scrollY;
+  const f=document.querySelector('.hw-floor');
+  const s=document.querySelector('.hw-sun');
+  if(f) f.style.transform=`perspective(500px) rotateX(68deg) translateY(${y*.15}px)`;
+  if(s) s.style.transform=`translateX(-50%) translateY(${y*.25}px)`;
+},{passive:true});
+
+// --- INTERSECTION OBSERVER ---
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('on'); });
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv,.rl,.rr').forEach(el=>obs.observe(el));
+
+// --- COUNTERS ---
+const cobs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting&&!e.target.dataset.done){
+      e.target.dataset.done='1';
+      const target=+e.target.dataset.target;
+      const t0=performance.now();
+      const dur=1600;
+      (function tick(now){
+        const p=Math.min((now-t0)/dur,1);
+        const ease=1-Math.pow(1-p,3);
+        e.target.textContent=Math.floor(ease*target);
+        if(p<1) requestAnimationFrame(tick);
+        else e.target.textContent=target;
+      })(performance.now());
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('.counter').forEach(el=>cobs.observe(el));
+</script>
+</body>
+</html>
