@@ -403,45 +403,34 @@ section { position:relative; z-index:2; }
 .galeria-intro { max-width:600px; margin-bottom:50px; }
 .galeria-intro p { color:var(--dim); line-height:1.8; font-size:.9rem; }
 
-.gallery-grid {
+.ig-embed-grid {
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  grid-template-rows:auto auto;
-  gap:10px;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  align-items:start;
 }
-.gpost {
-  border:1px solid rgba(255,255,255,.07); overflow:hidden;
-  position:relative; cursor:pointer; transition:all .4s;
-  display:flex; align-items:center; justify-content:center;
+.ig-embed-wrap {
+  border:1px solid rgba(255,0,128,.18);
+  box-shadow:0 0 24px rgba(255,0,128,.07);
+  overflow:hidden;
+  transition:border-color .3s, box-shadow .3s;
 }
-.gpost:first-child { grid-column:span 2; grid-row:span 2; }
-.gpost img { width:100%; height:100%; object-fit:cover; transition:transform .5s; display:block; }
-.gpost:hover img { transform:scale(1.06); }
-.gpost:hover { border-color:rgba(255,0,128,.5); box-shadow:0 0 30px rgba(255,0,128,.15); }
-.gpost-ph {
-  width:100%; padding-bottom:100%; position:relative; overflow:hidden;
+.ig-embed-wrap:hover {
+  border-color:rgba(255,0,128,.45);
+  box-shadow:0 0 40px rgba(255,0,128,.14);
 }
-.gpost:first-child .gpost-ph { padding-bottom:50%; }
-.gpost-ph-inner {
-  position:absolute; inset:0;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:8px;
+.ig-embed-wrap .instagram-media {
+  margin:0 !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
 }
-.gpost-icon { font-size:1.4rem; }
-.gpost:first-child .gpost-icon { font-size:2.5rem; }
-.gpost-label { font-family:'Share Tech Mono',monospace; font-size:.5rem; letter-spacing:.15em; color:rgba(255,255,255,.2); text-transform:uppercase; text-align:center; padding:0 12px; }
 
-/* Gradient per post */
-.gpost:nth-child(1) { background:linear-gradient(135deg,#0f0020,#200030); }
-.gpost:nth-child(2) { background:linear-gradient(135deg,#001020,#002030); }
-.gpost:nth-child(3) { background:linear-gradient(135deg,#200010,#300015); }
-.gpost:nth-child(4) { background:linear-gradient(135deg,#001a10,#002a15); }
-.gpost:nth-child(5) { background:linear-gradient(135deg,#201000,#301800); }
-.gpost:nth-child(6) { background:linear-gradient(135deg,#100020,#180030); }
-.gpost:nth-child(7) { background:linear-gradient(135deg,#1a0a00,#200f00); }
-
-.gallery-cta { text-align:center; margin-top:32px; }
+.gallery-cta { text-align:center; margin-top:40px; }
 .gallery-cta p { font-family:'Share Tech Mono',monospace; font-size:.65rem; color:var(--dim); letter-spacing:.1em; margin-bottom:16px; }
+
+@media(max-width:1024px) { .ig-embed-grid { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:600px)  { .ig-embed-grid { grid-template-columns:1fr; } }
 
 /* ====== MÉTRICAS ====== */
 #metricas { }
@@ -503,8 +492,6 @@ footer { position:relative; z-index:2; background:var(--deep); border-top:1px so
   .sobre-grid { grid-template-columns:1fr; gap:40px; }
   .proyectos-grid { grid-template-columns:1fr; }
   .proy-card.featured { grid-column:auto; display:block; }
-  .gallery-grid { grid-template-columns:repeat(3,1fr); }
-  .gallery-grid .gpost:first-child { grid-column:span 2; }
   .metrics-bar { grid-template-columns:repeat(2,1fr); }
   .metric { border-bottom:1px solid rgba(255,255,255,.06); }
   .footer-top { grid-template-columns:1fr 1fr; }
@@ -513,8 +500,6 @@ footer { position:relative; z-index:2; background:var(--deep); border-top:1px so
   .si { padding:70px 20px; }
   nav { padding:0 20px; }
   .nav-links { display:none; }
-  .gallery-grid { grid-template-columns:1fr 1fr; }
-  .gallery-grid .gpost:first-child { grid-column:span 2; }
   .footer-top { grid-template-columns:1fr; }
   body { cursor:auto; }
   .cur,.cur-r { display:none; }
@@ -800,29 +785,39 @@ footer { position:relative; z-index:2; background:var(--deep); border-top:1px so
       <p>Fotos del día a día de Curro — arcades, el DeLorean por Madrid, reparaciones épicas y la colección de móviles. Sigue a <strong style="color:white">@currozooo</strong> en Instagram para el contenido en tiempo real.</p>
     </div>
 
-    <div class="gallery-grid">
-      <div class="gpost rv st" style="--i:0">
-        <img src="assets/instagram/post-1.jpg" alt="ZOOO Arcade — máquinas originales 80s">
+    <div class="ig-embed-grid rv">
+
+      <div class="ig-embed-wrap rv st" style="--i:0">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DTT9lP5iJzb/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
       </div>
-      <div class="gpost rv st" style="--i:1">
-        <img src="assets/instagram/post-5.jpg" alt="ABC Arcade Madrid">
+
+      <div class="ig-embed-wrap rv st" style="--i:1">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DRAvKw9jVaG/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
       </div>
-      <div class="gpost rv st" style="--i:2">
-        <img src="assets/instagram/post-6.jpg" alt="Recreativas clásicas ZOOO">
+
+      <div class="ig-embed-wrap rv st" style="--i:2">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DRzGfytjavv/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
       </div>
-      <div class="gpost rv st" style="--i:3">
-        <img src="assets/instagram/post-2.jpg" alt="Curro en ZOOO Arcade">
+
+      <div class="ig-embed-wrap rv st" style="--i:3">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DYKpDS_tVvo/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
       </div>
-      <div class="gpost rv st" style="--i:4">
-        <img src="assets/instagram/post-8.jpg" alt="Apertura ZOOO Arcade 2.0">
+
+      <div class="ig-embed-wrap rv st" style="--i:4">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DYJ1sMjNdUw/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
       </div>
-      <div class="gpost rv st" style="--i:5">
-        <img src="assets/instagram/post-3.jpg" alt="Máquinas vintage originales">
+
+      <div class="ig-embed-wrap rv st" style="--i:5">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DYCqE0Ht_9P/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
       </div>
-      <div class="gpost rv st" style="--i:6">
-        <img src="assets/instagram/post-7.jpg" alt="Colección móviles Curro ZOOO">
+
+      <div class="ig-embed-wrap rv st" style="--i:6">
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DX4LjHAN7M7/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
       </div>
+
     </div>
+
+    <script async src="https://www.instagram.com/embed.js"></script>
 
     <div class="gallery-cta rv">
       <a href="https://www.instagram.com/currozooo" target="_blank" class="btn btn-pink">📸 Ver perfil completo en Instagram</a>
