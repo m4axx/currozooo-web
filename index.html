@@ -403,34 +403,44 @@ section { position:relative; z-index:2; }
 .galeria-intro { max-width:600px; margin-bottom:50px; }
 .galeria-intro p { color:var(--dim); line-height:1.8; font-size:.9rem; }
 
-.ig-embed-grid {
+.gallery-grid {
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:20px;
-  align-items:start;
+  grid-auto-rows:280px;
+  gap:10px;
 }
-.ig-embed-wrap {
-  border:1px solid rgba(255,0,128,.18);
-  box-shadow:0 0 24px rgba(255,0,128,.07);
-  overflow:hidden;
-  transition:border-color .3s, box-shadow .3s;
+.gpost {
+  border:1px solid rgba(255,255,255,.07); overflow:hidden;
+  position:relative; cursor:pointer; transition:all .4s;
+  display:block; text-decoration:none;
 }
-.ig-embed-wrap:hover {
-  border-color:rgba(255,0,128,.45);
-  box-shadow:0 0 40px rgba(255,0,128,.14);
+.gpost:first-child { grid-column:span 2; grid-row:span 2; }
+.gpost img { width:100%; height:100%; object-fit:cover; transition:transform .5s; display:block; }
+.gpost:hover img { transform:scale(1.06); }
+.gpost:hover { border-color:rgba(255,0,128,.5); box-shadow:0 0 30px rgba(255,0,128,.15); }
+/* Link cards (no photo) */
+.gpost-card {
+  width:100%; height:100%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:10px; padding:16px;
 }
-.ig-embed-wrap .instagram-media {
-  margin:0 !important;
-  width:100% !important;
-  max-width:100% !important;
-  min-width:0 !important;
-}
+.gpost-card-icon { font-size:2rem; line-height:1; }
+.gpost-card-type { font-family:'Share Tech Mono',monospace; font-size:.5rem; letter-spacing:.3em; color:var(--neon-pink); text-transform:uppercase; }
+.gpost-card-label { font-family:'Share Tech Mono',monospace; font-size:.55rem; letter-spacing:.1em; color:rgba(255,255,255,.25); text-transform:uppercase; text-align:center; padding:0 8px; line-height:1.6; }
+.gpost-card-arrow { font-family:'Share Tech Mono',monospace; font-size:.6rem; color:rgba(0,245,255,.4); position:absolute; bottom:12px; right:14px; transition:color .3s; }
+.gpost:hover .gpost-card-arrow { color:var(--neon-cyan); }
+.gpost:hover .gpost-card-type { color:var(--neon-cyan); }
+/* per-post gradient bg */
+.gpost:nth-child(1) { background:linear-gradient(135deg,#060615,#0d0d20); }
+.gpost:nth-child(2) { background:linear-gradient(135deg,#1a001a,#0a0015); }
+.gpost:nth-child(3) { background:linear-gradient(135deg,#001a1a,#00100a); }
+.gpost:nth-child(4) { background:linear-gradient(135deg,#1a0a00,#100500); }
+.gpost:nth-child(5) { background:linear-gradient(135deg,#0a001a,#050010); }
+.gpost:nth-child(6) { background:linear-gradient(135deg,#001a0a,#001005); }
+.gpost:nth-child(7) { background:linear-gradient(135deg,#1a1000,#100a00); }
 
-.gallery-cta { text-align:center; margin-top:40px; }
+.gallery-cta { text-align:center; margin-top:32px; }
 .gallery-cta p { font-family:'Share Tech Mono',monospace; font-size:.65rem; color:var(--dim); letter-spacing:.1em; margin-bottom:16px; }
-
-@media(max-width:1024px) { .ig-embed-grid { grid-template-columns:repeat(2,1fr); } }
-@media(max-width:600px)  { .ig-embed-grid { grid-template-columns:1fr; } }
 
 /* ====== MÉTRICAS ====== */
 #metricas { }
@@ -593,12 +603,12 @@ footer { position:relative; z-index:2; background:var(--deep); border-top:1px so
 
       <!-- Mini grid posts -->
       <div class="ig-grid">
-        <div class="ig-post"><img src="assets/instagram/post-1.jpg" alt="ZOOO Arcade"></div>
-        <div class="ig-post"><img src="assets/instagram/post-2.jpg" alt="Arcade Madrid"></div>
-        <div class="ig-post"><img src="assets/instagram/post-3.jpg" alt="Máquinas retro"></div>
-        <div class="ig-post"><img src="assets/instagram/post-4.jpg" alt="Recreativas"></div>
-        <div class="ig-post"><img src="assets/instagram/post-5.jpg" alt="ABC Arcade"></div>
-        <div class="ig-post"><img src="assets/instagram/post-6.jpg" alt="ZOOO Madrid"></div>
+        <a href="https://www.instagram.com/p/DTT9lP5iJzb/" target="_blank" class="ig-post" style="background:linear-gradient(135deg,#060615,#0d0d20)"><img src="assets/instagram/delorean.jpg" alt="DeLorean ZOOO" style="width:100%;height:100%;object-fit:cover"></a>
+        <a href="https://www.instagram.com/reel/DRAvKw9jVaG/" target="_blank" class="ig-post" style="background:linear-gradient(135deg,#1a001a,#0a0015)"><div class="ig-post-placeholder">▶<br>REEL</div></a>
+        <a href="https://www.instagram.com/p/DRzGfytjavv/" target="_blank" class="ig-post" style="background:linear-gradient(135deg,#001a1a,#00100a)"><div class="ig-post-placeholder">📸<br>POST</div></a>
+        <a href="https://www.instagram.com/reel/DYKpDS_tVvo/" target="_blank" class="ig-post" style="background:linear-gradient(135deg,#1a0a00,#100500)"><div class="ig-post-placeholder">▶<br>REEL</div></a>
+        <a href="https://www.instagram.com/reel/DYJ1sMjNdUw/" target="_blank" class="ig-post" style="background:linear-gradient(135deg,#0a001a,#050010)"><div class="ig-post-placeholder">▶<br>REEL</div></a>
+        <a href="https://www.instagram.com/reel/DX4LjHAN7M7/" target="_blank" class="ig-post" style="background:linear-gradient(135deg,#001a0a,#001005)"><div class="ig-post-placeholder">▶<br>REEL</div></a>
       </div>
     </div>
 
@@ -722,7 +732,7 @@ footer { position:relative; z-index:2; background:var(--deep); border-top:1px so
       <!-- FEATURED: DeLorean -->
       <div class="proy-card featured rv">
         <div class="delorean-vis" style="padding:0;overflow:hidden">
-          <img src="assets/instagram/post-8.jpg" alt="ZOOO Arcade" style="width:100%;height:100%;object-fit:cover;opacity:.85;filter:hue-rotate(180deg) saturate(1.2)">
+          <img src="assets/instagram/delorean.jpg" alt="DeLorean DMC-12 Curro ZOOO" style="width:100%;height:100%;object-fit:cover;opacity:.9">
         </div>
         <div>
           <div class="proy-num">00</div>
@@ -785,39 +795,69 @@ footer { position:relative; z-index:2; background:var(--deep); border-top:1px so
       <p>Fotos del día a día de Curro — arcades, el DeLorean por Madrid, reparaciones épicas y la colección de móviles. Sigue a <strong style="color:white">@currozooo</strong> en Instagram para el contenido en tiempo real.</p>
     </div>
 
-    <div class="ig-embed-grid rv">
+    <div class="gallery-grid">
 
-      <div class="ig-embed-wrap rv st" style="--i:0">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DTT9lP5iJzb/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
-      </div>
+      <!-- FEATURED: DeLorean (spans 2×2) -->
+      <a href="https://www.instagram.com/p/DTT9lP5iJzb/" target="_blank" class="gpost rv st" style="--i:0">
+        <img src="assets/instagram/delorean.jpg" alt="DeLorean DMC-12 — Curro ZOOO Madrid">
+        <div class="gpost-card-arrow">↗ IG</div>
+      </a>
 
-      <div class="ig-embed-wrap rv st" style="--i:1">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DRAvKw9jVaG/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
-      </div>
+      <a href="https://www.instagram.com/reel/DRAvKw9jVaG/" target="_blank" class="gpost rv st" style="--i:1">
+        <div class="gpost-card">
+          <span class="gpost-card-icon">▶</span>
+          <span class="gpost-card-type">Reel</span>
+          <span class="gpost-card-label">ZOOO Arcade<br>en acción</span>
+        </div>
+        <div class="gpost-card-arrow">↗ IG</div>
+      </a>
 
-      <div class="ig-embed-wrap rv st" style="--i:2">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DRzGfytjavv/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
-      </div>
+      <a href="https://www.instagram.com/p/DRzGfytjavv/" target="_blank" class="gpost rv st" style="--i:2">
+        <div class="gpost-card">
+          <span class="gpost-card-icon">📸</span>
+          <span class="gpost-card-type">Post</span>
+          <span class="gpost-card-label">Colección<br>de móviles</span>
+        </div>
+        <div class="gpost-card-arrow">↗ IG</div>
+      </a>
 
-      <div class="ig-embed-wrap rv st" style="--i:3">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DYKpDS_tVvo/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
-      </div>
+      <a href="https://www.instagram.com/reel/DYKpDS_tVvo/" target="_blank" class="gpost rv st" style="--i:3">
+        <div class="gpost-card">
+          <span class="gpost-card-icon">▶</span>
+          <span class="gpost-card-type">Reel</span>
+          <span class="gpost-card-label">Reparaciones<br>épicas</span>
+        </div>
+        <div class="gpost-card-arrow">↗ IG</div>
+      </a>
 
-      <div class="ig-embed-wrap rv st" style="--i:4">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DYJ1sMjNdUw/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
-      </div>
+      <a href="https://www.instagram.com/reel/DYJ1sMjNdUw/" target="_blank" class="gpost rv st" style="--i:4">
+        <div class="gpost-card">
+          <span class="gpost-card-icon">▶</span>
+          <span class="gpost-card-type">Reel</span>
+          <span class="gpost-card-label">DeLorean<br>por Madrid</span>
+        </div>
+        <div class="gpost-card-arrow">↗ IG</div>
+      </a>
 
-      <div class="ig-embed-wrap rv st" style="--i:5">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DYCqE0Ht_9P/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
-      </div>
+      <a href="https://www.instagram.com/reel/DYCqE0Ht_9P/" target="_blank" class="gpost rv st" style="--i:5">
+        <div class="gpost-card">
+          <span class="gpost-card-icon">▶</span>
+          <span class="gpost-card-type">Reel</span>
+          <span class="gpost-card-label">Arcade<br>clásico 80s</span>
+        </div>
+        <div class="gpost-card-arrow">↗ IG</div>
+      </a>
 
-      <div class="ig-embed-wrap rv st" style="--i:6">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DX4LjHAN7M7/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style="background:#FFF;border:0;border-radius:3px;margin:0;max-width:100%;min-width:0;padding:0;width:100%"></blockquote>
-      </div>
+      <a href="https://www.instagram.com/reel/DX4LjHAN7M7/" target="_blank" class="gpost rv st" style="--i:6">
+        <div class="gpost-card">
+          <span class="gpost-card-icon">▶</span>
+          <span class="gpost-card-type">Reel</span>
+          <span class="gpost-card-label">Máquinas<br>originales</span>
+        </div>
+        <div class="gpost-card-arrow">↗ IG</div>
+      </a>
 
     </div>
-
-    <script async src="https://www.instagram.com/embed.js"></script>
 
     <div class="gallery-cta rv">
       <a href="https://www.instagram.com/currozooo" target="_blank" class="btn btn-pink">📸 Ver perfil completo en Instagram</a>
